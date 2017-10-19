@@ -1,0 +1,20 @@
+{  
+    "name": "wechat",  
+  
+    "main": "index.html",  
+  
+    "window": {  
+          
+        "title": "wechat",  
+      
+        "resizable":true,  
+  
+        "toolbar": true,  
+  
+        "width": 900,  
+      
+    "height": 600  
+      
+    }  
+  
+}  

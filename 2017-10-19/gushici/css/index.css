@@ -1,0 +1,52 @@
+ @font-face {
+     font-family: caide;
+     src: url('yayuan.ttf');
+   }
+
+ *{
+    margin: 0;
+    background-color: #CCFFFF;
+}
+
+h1{
+    text-align: center;
+    color: #CC3333;
+    font-family: Impact, Charcoal, sans-serif;
+}
+h2{
+    color:#CC3366;
+    margin-left: 14%;
+    font-family: Impact, Charcoal, sans-serif;
+}
+h3{
+    color:#FF3333;
+    margin-left: 15%;
+    margin-top: 10px;
+    font-family: Impact, Charcoal, sans-serif;
+}
+.songci{
+    width: 70%;
+    margin-left: 15%;
+    height: auto;
+    text-indent: 3em;
+    color: #993399;
+    border:2px solid #a1a1a1;
+    border-radius:25px;
+}
+.year-author{
+    margin-left: 18%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 80px;
+    height: 20px;
+    background-color: #FF99CC;
+    border:2px solid #a1a1a1;
+    border-radius:25px;
+}
+p{
+    font-family: caidie;
+}
+
+.complete-songci{
+    margin-top: 20px;
+}
