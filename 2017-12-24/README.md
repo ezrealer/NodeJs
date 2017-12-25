@@ -1,5 +1,5 @@
 # express模块整合
-
+[toc]
 ## 1 安装模块
 
 首先，需要一些模块来实现请求、数据解析、视图引擎等。
@@ -270,4 +270,82 @@ server.listen(8080);
 
 ![](img/007.png)
 
+对于`body-parser`,它可以处理一些简单的数据提交表单，默认为`application/x-www-form-urlencoded`,而`multer`就用来处理文件提交的表单。它的`enctype="multipart/form-data"`
 
+## 4 模板引擎适配
+在Node中，可以使用`consolidate`来适配不同的模板引擎，避免项目自身过于冗余。
+安装:
+```
+$ cnpm install consollidate
+```
+使用：
+```javascript
+const express = require('express');
+const static = require('express-static');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session');
+const multer = require('multer')
+const consolidate = require('consolidate');
+
+var server = express();
+
+server.listen(8080);
+
+//解析cookie
+server.use(cookieParser('asdzxc'));
+
+//解析session
+var arr = [];
+
+for(var i=0;i<1000;i++){
+	arr.push('keys_'+Math.random());
+}
+server.use(cookieSession({name: 'sess_id', keys: arr, maxAge: 20*60*1000}));
+
+
+//处理post
+server.use(bodyParser.urlencoded({extended: false}));
+server.use(multer({dest:'./www/upload/'}).any());
+
+//处理模板引擎
+server.set('view engine', 'html');
+server.set('views', './views');
+server.engine('html', consolidate.ejs);
+
+//用户请求
+// server.use('/', function (req, res, next) {
+// 	console.log(req.query, req.body, req.cookies, req.session);
+// });
+server.use('/index', function(req, res) {
+	res.render('index.html', {next: '如梦'});
+});
+
+//处理静态文件
+server.use(static('./www'));
+```
+启动服务器执行一下：
+
+![](img/008.png)
+
+模板引擎适配成功。
+
+## 5 路由
+路由用于网站结构较为复杂时使用，例如，在一个大型网站为用户写一个路由：
+```javascript
+const express = require('express');
+var server = express();
+
+var routerUser = express.Router();
+routerUser.get('/login.html', function(req, res) {
+	res.send('登录页面');
+});
+routerUser.get('/reg.html', function(req, res) {
+	res.send('注册页面');
+});
+routerUser.get('/user.html', function(req, res) {
+	res.send('用户主页面');
+});
+server.use('user', routerUser);
+server.listen(8080);
+```
